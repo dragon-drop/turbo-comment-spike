@@ -8,7 +8,13 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/1 or /comments/1.json
-  def show; end
+  def show
+    if request.headers['turbo-frame']
+      render partial: 'comment', locals: { comment: @comment }
+    else
+      render 'show'
+    end
+  end
 
   # GET /comments/new
   def new

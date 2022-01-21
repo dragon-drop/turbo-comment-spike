@@ -1,11 +1,16 @@
+<% like = Like.find_or_initialize_by(comment: comment, user: current_user) %>
 <%= turbo_stream_from comment %>
 <%= turbo_frame_tag comment do %>
   <div style="border: 1px solid black; padding: 1em; margin-top: 2em">
   <strong><%= comment.user.email.split("@").first %></strong>
   <p><%= comment.body %></p>
   <%= comment.likes_count %> likes
+  <% if like.persisted? %>
+    <strong>You like this</strong> <%= link_to "Unlike", comment_like_path(comment, like), method: :delete %>
+  <% else %>
   <%= form_with model: [comment, Like.new], method: :post do |form| %>
     <%= form.submit "Like this" %>
+  <% end %>
   <% end %>
   </div>
 <% end %>
