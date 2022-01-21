@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Comments</h1>
+
+<%= turbo_frame_tag "new_comment" do %>
+  <%= link_to 'New Comment', new_comment_path %>
+<% end %>
+
+<%= turbo_stream_from :comments %>
+<div id="comments">
+  <%= render @comments %>
+</div>
