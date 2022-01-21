@@ -3,4 +3,5 @@ class Like < ApplicationRecord
   belongs_to :comment, counter_cache: true, touch: true
 
   validates :comment, uniqueness: { scope: :user }
+  after_destroy { comment.touch }
 end

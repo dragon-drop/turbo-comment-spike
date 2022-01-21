@@ -4,4 +4,9 @@ class LikesController < ApplicationController
 
     @comment.likes.create(user: current_user)
   end
+
+  def destroy
+    @like = Like.find(params[:id])
+    @like.destroy
+  end
 end
