@@ -1,7 +1,11 @@
+<%= turbo_stream_from comment %>
 <%= turbo_frame_tag comment do %>
   <div style="border: 1px solid black; padding: 1em; margin-top: 2em">
   <strong><%= comment.user.email.split("@").first %></strong>
   <p><%= comment.body %></p>
   <%= comment.likes_count %> likes
+  <%= form_with model: [comment, Like.new], method: :post do |form| %>
+    <%= form.submit "Like this" %>
+  <% end %>
   </div>
 <% end %>
